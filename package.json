@@ -1,0 +1,27 @@
+{
+  "main": "index.js",
+  "name": "domakas-codefights",
+  "description": "Codefights fighter",
+  "webkit": {
+    "plugin": true
+  },
+  "version": "0.1.0",
+  "dependencies": {
+    "sync-prompt": "~0.4.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/domakas/nodeSDK.git"
+  },
+  "keywords": [
+    "codefights",
+    "nodejs"
+  ],
+  "author": "domas maksimas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/domakas/nodeSDK/issues"
+  },
+  "homepage": "https://github.com/domakas/nodeSDK"
+}
