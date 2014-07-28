@@ -6,7 +6,7 @@ npm install codefights [-g]
 ``
 
 Sample bot:
-``
+```javascript
 var CodeFights = require('codefights');
 var Area = CodeFights.Area;
 var Move = CodeFights.Move;
@@ -32,4 +32,4 @@ module.exports = MyFighter;
 // Do not delete these lines
 var sdk = new SDK(MyFighter);
 sdk.run(process.argv);
-``
+```
