@@ -1,5 +1,5 @@
-var GameScoringRules = require('../model/GameScoringRules');
-var Protocol = require('./server/Protocol');
+var GameScoringRules = require('../model/GameScoringRules'),
+    Protocol = require('./server/Protocol');
 
 function Commentator() {
   this.fighter1 = 'Fighter 1';
@@ -45,15 +45,16 @@ Commentator.prototype.describeMove = function(fighterName, move, score, counterM
 };
 
 Commentator.prototype.describeAttacks = function(move, counterMove, score) {
-  var attacks = move.getAttacks();
+  var attacks = move.getAttacks(),
+      rez, i;
 
   if(attacks.length <= 0) {
     return ' did NOT attack at all ';
   }
 
-  var rez = ' attacked ';
+  rez = ' attacked ';
 
-  for(var i = 0; i < attacks.length; i++) {
+  for(i = 0; i < attacks.length; i++) {
     rez = rez + attacks[i];
 
     if(counterMove.getBlocks().indexOf(attacks[i]) === -1) {
@@ -67,14 +68,15 @@ Commentator.prototype.describeAttacks = function(move, counterMove, score) {
 };
 
 Commentator.prototype.describeDefences = function(move) {
-  var blocks = move.getBlocks();
+  var blocks = move.getBlocks(),
+      rez, i;
 
   if(blocks.length <= 0) {
     return ' and was NOT defending at all.';
   }
 
-  var rez = ' while defending ';
-  for(var i = 0; i < blocks.length; i++) {
+  rez = ' while defending ';
+  for(i = 0; i < blocks.length; i++) {
     rez = rez + blocks[i] + ', ';
   }
 
@@ -82,8 +84,8 @@ Commentator.prototype.describeDefences = function(move) {
 };
 
 Commentator.prototype.describeComment = function(move) {
-  var comment = move.getComment();
-  var proto = new Protocol();
+  var comment = move.getComment(),
+      proto = new Protocol();
 
   if(comment) {
     return ' Also said "' + proto.sanitizeComment(comment) + '"';

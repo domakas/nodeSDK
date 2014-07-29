@@ -11,9 +11,11 @@ function GameScoringRules() {
 }
 
 GameScoringRules.prototype.calculateScore = function(attacks, blocks) {
-  var rez = 0;
+  var rez = 0,
+      i;
+
   if(attacks) {
-    for(var i = 0; i < attacks.length; i++) {
+    for(i = 0; i < attacks.length; i++) {
       if(blocks.indexOf(attacks[i]) !== -1) {
         continue;
       }

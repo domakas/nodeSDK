@@ -32,13 +32,14 @@ Move.prototype.addBlock = function(area) {
 };
 
 Move.prototype.toString = function() {
-  var rez = 'Move ';
+  var rez = 'Move ',
+      i, j;
 
-  for(var i = 0; i < this.attacks.length; i++) {
+  for(i = 0; i < this.attacks.length; i++) {
     rez = rez + ' ATTACK ' + this.attacks[i];
   }
 
-  for(var j = 0; j < this.blocks.length; j++) {
+  for(j = 0; j < this.blocks.length; j++) {
     rez = rez + ' BLOCK ' + this.blocks[i];
   }
 

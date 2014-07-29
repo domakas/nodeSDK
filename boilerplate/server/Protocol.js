@@ -1,7 +1,7 @@
-var ServerResponse = require('./ServerResponse');
-var ProtocolException = require('../ProtocolException');
-var Area = require('../../model/Area');
-var Move = require('../../model/Move');
+var ServerResponse = require('./ServerResponse'),
+    ProtocolException = require('../ProtocolException'),
+    Area = require('../../model/Area'),
+    Move = require('../../model/Move');
 
 function Protocol(inStream) {
   this.HANDSHAKE = 'I-AM ready';
@@ -30,13 +30,14 @@ Protocol.prototype.readResponse = function() {
 };
 
 Protocol.prototype.serializeMove = function(move) {
-  var rez = '';
+  var rez = '',
+      i, j;
 
-  for(var i = 0; i < move.getAttacks().length; i++) {
+  for(i = 0; i < move.getAttacks().length; i++) {
     rez = rez + 'a' +  move.getAttacks()[i].substring(0, 1);
   }
 
-  for(var j = 0; j < move.getBlocks().length; j++) {
+  for(j = 0; j < move.getBlocks().length; j++) {
     rez = rez + 'b' +  move.getBlocks()[j].substring(0, 1);
   }
 
@@ -48,17 +49,18 @@ Protocol.prototype.serializeMove = function(move) {
 };
 
 Protocol.prototype.parseMove = function(input) {
+  var rez, index, type;
   if(!input) {
     throw new ProtocolException('Input stream was closed');
   }
 
   input = input.trim();
 
-  var rez = new Move();
-  var index = 0;
+  rez = new Move();
+  index = 0;
 
   while (index < input.length) {
-    var type = input[index++];
+    type = input[index++];
 
     switch (type) {
       case 'a': rez.addAttack(this.getArea(input, index++)); break;
@@ -92,13 +94,13 @@ Protocol.prototype.sanitizeComment = function(comment) {
 };
 
 Protocol.prototype.parse = function(line) {
-  var result = new ServerResponse();
-
-  var words = line.split(' ');
-  var index = 0;
+  var result = new ServerResponse(),
+      words = line.split(' '),
+      index = 0,
+      firstKeyword, nextKeyword;
 
   while(index < words.length) {
-    var firstKeyword = words[index++];
+    firstKeyword = words[index++];
 
     if (index >= words.length) {
       throw new ProtocolException(
@@ -107,7 +109,7 @@ Protocol.prototype.parse = function(line) {
       );
     }
 
-    var nextKeyword = words[index++];
+    nextKeyword = words[index++];
 
     if (this.YOUR_SCORE === firstKeyword) {
       result.score1 = parseInt(nextKeyword, 10);

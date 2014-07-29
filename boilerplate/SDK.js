@@ -1,27 +1,25 @@
-var ProtocolException = require('./ProtocolException');
-var Arena = require('./Arena');
-var Human = require('./Human');
-var Boxer = require('../samples/Boxer');
-var Kickboxer = require('../samples/Kickboxer');
-var ServerMode = require('./server/ServerMode');
-
-var FIGHT_HUMAN_SWITCH = '--fight-me';
-var FIGHT_BOT_SWITCH = '--fight-bot';
-var RUN_ON_SERVER_SWITCH = '--fight-on-server';
-
-var USAGE_INSTRUCTIONS =
-  FIGHT_HUMAN_SWITCH + '\t\truns your bot against you in interactive mode\n' +
-  FIGHT_BOT_SWITCH + 'boxer\truns your bot against a built-in boxer bot\n' +
-  FIGHT_BOT_SWITCH + 'kickboxer\truns your bot against a built-in kickboxer bot\n' +
-  RUN_ON_SERVER_SWITCH + '\truns your bot in codefights engine environment';
+var ProtocolException = require('./ProtocolException'),
+    Arena = require('./Arena'),
+    Human = require('./Human'),
+    Boxer = require('../samples/Boxer'),
+    Kickboxer = require('../samples/Kickboxer'),
+    ServerMode = require('./server/ServerMode'),
+    FIGHT_HUMAN_SWITCH = '--fight-me',
+    FIGHT_BOT_SWITCH = '--fight-bot',
+    RUN_ON_SERVER_SWITCH = '--fight-on-server',
+    USAGE_INSTRUCTIONS =
+        FIGHT_HUMAN_SWITCH + '\t\truns your bot against you in interactive mode\n' +
+        FIGHT_BOT_SWITCH + 'boxer\truns your bot against a built-in boxer bot\n' +
+        FIGHT_BOT_SWITCH + 'kickboxer\truns your bot against a built-in kickboxer bot\n' +
+        RUN_ON_SERVER_SWITCH + '\truns your bot in codefights engine environment';
 
 function SDK(fighter) {
   this.fighter = fighter;
 }
 
 SDK.prototype.run = function(argv) {
-  var MyFighter = this.fighter;
-  var args = argv.splice(2, argv.length),
+  var MyFighter = this.fighter,
+      args = argv.splice(2, argv.length),
       arena, serverMode;
 
   if(this.isFightHumanMode(args)) {
@@ -56,9 +54,10 @@ SDK.prototype.isFightHumanMode = function(args) {
 };
 
 SDK.prototype.printUsageInstructions = function(args) {
+  var i;
   if(args.length > 0) {
     console.log('unrecognized option(s): ');
-    for(var i = 0; i < args.length; i++) {
+    for(i = 0; i < args.length; i++) {
       console.log(args[i] + ' ');
     }
     console.log('\n');

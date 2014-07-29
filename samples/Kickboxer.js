@@ -1,5 +1,5 @@
-var Area = require('../model/Area');
-var Move = require('../model/Move');
+var Area = require('../model/Area'),
+    Move = require('../model/Move');
 
 function Kickboxer() {
   this.attack1 = Area.GROIN;

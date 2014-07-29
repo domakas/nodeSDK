@@ -16,12 +16,12 @@ Arena.prototype.registerFighter = function(fighter, name) {
 };
 
 Arena.prototype.stageFight = function() {
+  var f1name, fighter1, f1, f1Move = null, score1 = 0, f1Lifepoints = GameScoringRules.LIFEPOINTS, move1,
+      f2name, fighter2, f2, f2Move = null, score2 = 0, f2Lifepoints = GameScoringRules.LIFEPOINTS, move2;
   if(this.fighters.length != 2) {
     throw new ProtocolException('Must be 2 fighters!');
   }
 
-  var f1name, fighter1, f1, f1Move = null, score1 = 0, f1Lifepoints = GameScoringRules.LIFEPOINTS,
-      f2name, fighter2, f2, f2Move = null, score2 = 0, f2Lifepoints = GameScoringRules.LIFEPOINTS;
   f2 = this.fighters.pop();
   f1 = this.fighters.pop();
 
@@ -34,8 +34,8 @@ Arena.prototype.stageFight = function() {
   this.commentator.setFighterNames(f1name, f2name);
 
   while(f1Lifepoints > 0 && f2Lifepoints > 0) {
-    var move1 = fighter1.makeNextMove(f2Move, score1, score2);
-    var move2 = fighter2.makeNextMove(f1Move, score2, score1);
+    move1 = fighter1.makeNextMove(f2Move, score1, score2);
+    move2 = fighter2.makeNextMove(f1Move, score2, score1);
 
     score1 = GameScoringRules.calculateScore(move1.getAttacks(),
       move2.getBlocks());

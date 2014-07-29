@@ -1,6 +1,6 @@
-var prompt = require('sync-prompt').prompt;
-var Protocol = require('./Protocol');
-var ServerResponse = require('./ServerResponse');
+var prompt = require('sync-prompt').prompt,
+    Protocol = require('./Protocol'),
+    ServerResponse = require('./ServerResponse');
 
 function ServerMode() {
   this.inStream = prompt;
@@ -9,13 +9,14 @@ function ServerMode() {
 }
 
 ServerMode.prototype.run = function(fighter) {
-  var protocol = new Protocol(this.inStream, this.outStream);
+  var protocol = new Protocol(this.inStream, this.outStream),
+      resp, move;
   protocol.handshake();
 
-  var resp = new ServerResponse();
+  resp = new ServerResponse();
 
   while (!this.cancelFlag) {
-    var move = fighter.makeNextMove(resp.move, resp.score1, resp.score2);
+    move = fighter.makeNextMove(resp.move, resp.score1, resp.score2);
     protocol.sendRequest(move);
     resp = protocol.readResponse();
   }

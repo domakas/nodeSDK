@@ -1,11 +1,9 @@
-var prompt = require('sync-prompt').prompt;
-var Protocol = require('./server/Protocol');
-var ProtocolException = require('./ProtocolException');
-var GameScoringRules = require('../model/GameScoringRules');
+var prompt = require('sync-prompt').prompt,
+    Protocol = require('./server/Protocol'),
+    ProtocolException = require('./ProtocolException'),
+    GameScoringRules = require('../model/GameScoringRules');
 
-function Human() {
-
-}
+function Human() {}
 
 Human.prototype.makeNextMove = function(oppMove, iScored, oppScored) {
   this.printInstructions();
@@ -25,13 +23,14 @@ Human.prototype.printInstructions = function() {
 };
 
 Human.prototype.parseInput = function(strin) {
-  var input = strin.replace(/ /g, '').toLocaleLowerCase();
-  var prot = new Protocol();
+  var input = strin.replace(/ /g, '').toLocaleLowerCase(),
+      prot = new Protocol(),
+      move;
 
   if (this.startsWith(input, 'q'))
     throw new ProtocolException('Exiting');
 
-  var move = prot.parseMove(input);
+  move = prot.parseMove(input);
   if (!GameScoringRules.isMoveLegal(move)) {
     throw new ProtocolException('Can make max 3 things at a time!');
   }
