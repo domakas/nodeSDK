@@ -7,7 +7,7 @@ npm install codefights [-g]
 
 Sample bot:
 ```javascript
-var CodeFights = require('codefights');
+var CodeFights = require('domakas-codefights');
 var Area = CodeFights.Area;
 var Move = CodeFights.Move;
 var SDK = CodeFights.SDK;
@@ -33,3 +33,9 @@ module.exports = MyFighter;
 var sdk = new SDK(MyFighter);
 sdk.run(process.argv);
 ```
+
+To manually fight your bot: ``node MyFighter.js --fight-me``
+
+To fight boxer bot: ``node MyFighter.js --fight-bot boxer``
+
+To fight kickboxer bot: ``node MyFighter.js --fight-bot kickboxer``
