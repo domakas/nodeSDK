@@ -33,7 +33,6 @@ SDK.prototype.run = function(argv) {
     arena.registerFighter(this.createBot(args), args[1]);
     arena.stageFight();
   } else if(this.isRunInServerMode(args)) {
-    console.log(MyFighter);
     serverMode = new ServerMode();
     serverMode.run(new MyFighter());
   } else {
