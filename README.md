@@ -2,7 +2,7 @@ CodeFights SDK for NodeJS
 
 Instalation:
 ``
-npm install codefights [-g]
+npm install domakas-codefights [-g]
 ``
 
 Sample bot:
